@@ -13,19 +13,19 @@ const db = mysql.createConnection({
   database: 'chat'
 });
 
+db.connect();
 
-
-db.connect(function (err) {
-  if (err) {
-    throw err;
-  }
-  console.log('Connected!');
-  db.query('select * from messages', function (err, result) {
-    if (err) {
-      throw err;
-    }
-    console.log('Database created');
-  });
-});
+// db.connect(function (err) {
+//   if (err) {
+//     throw err;
+//   }
+//   console.log('Connected!');
+//   db.query('select * from messages', function (err, result) {
+//     if (err) {
+//       throw err;
+//     }
+//     console.log('Database created');
+//   });
+// });
 
 module.exports = db;

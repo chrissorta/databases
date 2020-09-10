@@ -18,8 +18,10 @@ module.exports = {
 
   create: function (user, callback) {
     // create variable createUser and initialize to insert new user into db
-    let insertUser = `INSERT INTO users (id, username) VALUES (NULL, ${user})`;
-    db.query(insertUser, (err, result) => {
+    var queryStr = 'insert into users(userid) values (?)';
+
+    // let insertUser = `INSERT INTO users (id, username) VALUES (NULL, ${user})`;
+    db.query(queryStr, user, (err, result) => {
       // handle error
       if (err) {
         callback(err);

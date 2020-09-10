@@ -12,20 +12,19 @@ module.exports = {
       if (err) {
         res.end(err);
       } else {
-        res.end(JSON.stringify(results));
+        res.json(results);
       }
-
     });
   },
 
   post: function (req, res) {
-    var data = req.body;
-    data = data.toString();
+    var data = [req.body.message, req.body.username, req.body.roomname];
+    console.log(data);
     messages.create(data, (err, results) => {
       if (err) {
         res.end(JSON.stringify(err));
       } else {
-        res.end();
+        res.sendStatus(201);
       }
     });
   }

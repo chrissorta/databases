@@ -9,18 +9,19 @@ module.exports = {
       if (err) {
         res.end(err);
       } else {
-        res.end(JSON.stringify(results));
+        res.json(results);
       }
     }
     );
   },
 
   post: function (req, res) {
-    users.create(req.body, (err, results) => {
+    var data = [req.body.username];
+    users.create(data, (err, results) => {
       if (err) {
         res.end(JSON.stringify(err));
       } else {
-        res.end();
+        res.sendStatus(201);
       }
     });
   }

@@ -22,8 +22,10 @@ module.exports = {
   },
   create: function (messageObj, callback) {
     // create variable createUser and initialize to insert new user into db
-    let insertMessage = `INSERT INTO messages (id, message_text, username, roomname) VALUES (NULL, ${messageObj.message}, ${messageObj.username}, ${messageObj.roomname})`;
-    db.query(insertMessage, (err, result) => {
+    var queryStr = 'insert into messages(text, userid, roomname) \
+                    value (?, ?, ?)';
+    // let insertMessage = `INSERT INTO messages ( message_text, username, roomname) VALUES ( ${messageObj[0]}, ${messageObj[1]}, ${messageObj[2]})`;
+    db.query(queryStr, messageObj, (err, result) => {
       // handle error
       if (err) {
         callback(err);

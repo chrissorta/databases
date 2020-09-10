@@ -3,42 +3,39 @@ var RoomsView = {
   $button: $('#rooms button'),
   $select: $('#rooms select'),
 
-  initialize: function () {
-    RoomsView.$button.on('click', () => {
-      RoomsView.renderRoom($("#room").val());
-      RoomsView.render($("#room").val());
-      this.$select.val($("#room").val());
-    });
-    //handle select change and call roomsview.render
-    this.$select.on('change', () => RoomsView.render(this.$select.val()));
+  initialize: function() {
+
+    RoomsView.$select.on('change', RoomsView.handleChange);
+    RoomsView.$button.on('click', RoomsView.handleClick);
   },
 
-  render: function (room) {
-    //fetch the data for most up to date
-    App.startSpinner();
-    //App.fetch(App.stopSpinner);
-    App.stopSpinner();
-    //underscore filter message data by roomname
-    console.log(room);
-    let filteredData;
-    if (room === "All") {
-      filteredData = Messages.data;
-    } else {
-      filteredData = _.filter(Messages.data, (message) => message.roomname === room);
+  render: function() {
+
+    RoomsView.$select.html('');
+    Rooms
+      .items()
+      .each(RoomsView.renderRoom);
+    RoomsView.$select.val(Rooms.selected);
+  },
+
+  renderRoom: function(roomname) {
+    var $option = $('<option>').val(roomname).text(roomname);
+    RoomsView.$select.append($option);
+  },
+
+  handleChange: function(event) {
+    Rooms.selected = RoomsView.$select.val();
+    MessagesView.render();
+  },
+
+  handleClick: function(event) {
+    var roomname = prompt('Enter room name');
+    if (roomname) {
+      Rooms.add(roomname, () => {
+        RoomsView.render();
+        MessagesView.render();
+      });
     }
-    //Messagesview.render with the filterdata
-    MessagesView.render(filteredData);
-  },
-
-  renderRoom: function (roomName) {
-    //create a new option element with template
-    var roomObject = { roomName: roomName };
-    var renderOption = _.template(`
-    <option value="<%- roomName %>"><%- roomName %></option>
-    `);
-    //append it to $select
-    this.$select.append(renderOption(roomObject));
-    Rooms.add(roomName);
   }
 
 };

@@ -1,5 +1,5 @@
 var models = require('../models');
-exports.messages = require('../models/messages.js');
+var messages = require('../models/messages.js');
 
 // where we call the model functions to be executed
 // write query type database functions
@@ -19,9 +19,11 @@ module.exports = {
   },
 
   post: function (req, res) {
-    messages.create(req.json, (err, results) => {
+    var data = req.body;
+    data = data.toString();
+    messages.create(data, (err, results) => {
       if (err) {
-        res.end(err);
+        res.end(JSON.stringify(err));
       } else {
         res.end();
       }

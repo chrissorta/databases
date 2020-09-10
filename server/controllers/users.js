@@ -16,7 +16,8 @@ module.exports = {
   },
 
   post: function (req, res) {
-    var data = [req.body.username];
+    let data = [req.body.username];
+    // console.log(data);
     users.create(data, (err, results) => {
       if (err) {
         res.end(JSON.stringify(err));

@@ -10,11 +10,11 @@ CREATE TABLE users (
   PRIMARY KEY (id)
 );
 
--- CREATE TABLE rooms (
---   id INT NOT NULL AUTO_INCREMENT,
---   roomname VARCHAR(100),
---   PRIMARY KEY (id)
--- );
+-- -- CREATE TABLE rooms (
+-- --   id INT NOT NULL AUTO_INCREMENT,
+-- --   roomname VARCHAR(100),
+-- --   PRIMARY KEY (id)
+-- -- );
 
 CREATE TABLE messages (
   id  INT NOT NULL  AUTO_INCREMENT,

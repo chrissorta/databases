@@ -1,7 +1,7 @@
 var db = require('../db');
 
 module.exports = {
-  getAll: function () {
+  getAll: function (callback) {
     // create variable and initialize to select all messages
     let gatheredUsers = 'SELECT * FROM users';
     // invoke db.query on the gathered users, takes in variable, and an err first callback
@@ -18,7 +18,8 @@ module.exports = {
 
   create: function (user, callback) {
     // create variable createUser and initialize to insert new user into db
-    var queryStr = 'insert into users(userid) values (?)';
+    // console.log(user);
+    var queryStr = 'insert into users(username) values (?)';
 
     // let insertUser = `INSERT INTO users (id, username) VALUES (NULL, ${user})`;
     db.query(queryStr, user, (err, result) => {

@@ -19,7 +19,7 @@ module.exports = {
 
   post: function (req, res) {
     var data = [req.body.message, req.body.username, req.body.roomname];
-    console.log(data);
+    // console.log(data);
     messages.create(data, (err, results) => {
       if (err) {
         res.end(JSON.stringify(err));

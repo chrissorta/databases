@@ -20,6 +20,8 @@ CREATE TABLE messages (
   id  INT NOT NULL  AUTO_INCREMENT,
   message_text VARCHAR(100),
   message_timestamp timestamp,
+  username VARCHAR(100),
+  roomname VARCHAR(100),
   userId INT NOT NULL,
   roomId INT NOT NULL,
   PRIMARY KEY (id),

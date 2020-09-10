@@ -3,12 +3,37 @@ CREATE DATABASE chat;
 USE chat;
 
 CREATE TABLE messages (
-  /* Describe your table here.*/
+  id  INT NOT NULL  AUTO_INCREMENT,
+  message_text VARCHAR(100),
+  message_timestamp timestamp,
+  userId INT NOT NULL,
+  roomId INT NOT NULL,
+  PRIMARY KEY (id)
+  FOREIGN KEY (userId) REFERENCES users(id),
+  FOREIGN KEY (roomId) REFERENCES rooms(id)
+
 );
 
 /* Create other tables and define schemas for them here! */
 
+CREATE TABLE users (
+  id INT NOT NULL AUTO_INCREMENT,
+  username VARCHAR(100),
+  PRIMARY KEY (id)
+);
 
+CREATE TABLE rooms (
+  id INT NOT NULL AUTO_INCREMENT,
+  roomname VARCHAR(100),
+  PRIMARY KEY (id)
+);
+
+-- CREATE TABLE users_rooms (
+--   userID INT NOT NULL,
+--   roomID INT NOT NULL
+--   -- FOREIGN KEY (userId) REFERENCES users(id),
+--   -- FOREIGN KEY (roomId) REFERENCES rooms(id)
+-- );
 
 
 /*  Execute this file from the command line by typing:
